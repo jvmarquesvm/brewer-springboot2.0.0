@@ -93,28 +93,28 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 @EnableCaching
 @EnableAsync
 public class WebConfig implements /*ApplicationContextAware,*/ WebMvcConfigurer {
-	//private ApplicationContext applicationContext;
+	private ApplicationContext applicationContext;
 	
-//	private ITemplateResolver templateResolver() {
-//		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-//		resolver.setApplicationContext(applicationContext);
-//		resolver.setPrefix("classpath:/templates/");
-//		resolver.setSuffix(".html");
-//		resolver.setTemplateMode(TemplateMode.HTML);
-//		return resolver;
-//	}
-//	
-//	@Bean
-//	public TemplateEngine templateEngine() {
-//		SpringTemplateEngine engine = new SpringTemplateEngine();
-//		engine.setEnableSpringELCompiler(true);
-//		engine.setTemplateResolver(templateResolver());
-//		engine.addDialect(new LayoutDialect()); //configurando o dialeto thymeleaf para o decorator
-//		engine.addDialect(new BrewerDialect()); //Extendendo o thymeleaf
-//		engine.addDialect(new DataAttributeDialect()); //Extendendo o thymeleaf - atributos data
-//		engine.addDialect(new SpringSecurityDialect()); //Extendendo o thymeleaf - Spring Security ( para buscar o nome do usuário logado )
-//		return engine;
-//	}
+	private ITemplateResolver templateResolver() {
+		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+		resolver.setApplicationContext(applicationContext);
+		resolver.setPrefix("classpath:/templates/");
+		resolver.setSuffix(".html");
+		resolver.setTemplateMode(TemplateMode.HTML);
+		return resolver;
+	}
+	
+	@Bean
+	public TemplateEngine templateEngine() {
+		SpringTemplateEngine engine = new SpringTemplateEngine();
+		engine.setEnableSpringELCompiler(true);
+		engine.setTemplateResolver(templateResolver());
+		engine.addDialect(new LayoutDialect()); //configurando o dialeto thymeleaf para o decorator
+		engine.addDialect(new BrewerDialect()); //Extendendo o thymeleaf
+		engine.addDialect(new DataAttributeDialect()); //Extendendo o thymeleaf - atributos data
+		engine.addDialect(new SpringSecurityDialect()); //Extendendo o thymeleaf - Spring Security ( para buscar o nome do usuário logado )
+		return engine;
+	}
 
 	//
 	//@Override
@@ -122,14 +122,14 @@ public class WebConfig implements /*ApplicationContextAware,*/ WebMvcConfigurer 
 	//	this.applicationContext = applicationContext;
 	//}
 	
-	//@Bean
-	//public ViewResolver viewResolver() {
-	//	ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-	//	resolver.setTemplateEngine(templateEngine());
-	//	resolver.setCharacterEncoding("UTF-8");
-	//	resolver.setOrder(1);
-	//	return resolver;
-	//}
+//	@Bean
+//	public ViewResolver viewResolver() {
+//		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+//		resolver.setTemplateEngine(templateEngine());
+//		resolver.setCharacterEncoding("UTF-8");
+//		resolver.setOrder(1);
+//		return resolver;
+//	}
 	
 	/**
 	 * Adicionar recursos que não tem na aplicação
