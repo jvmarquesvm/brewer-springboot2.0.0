@@ -21,8 +21,11 @@
 					<div class="row">
 						<div class="col-xs-10">
 							<h1>
-								<strong th:if="${venda.nova}" th:text="#{venda.cadastro.titulo}">Cadastro de venda</strong>
-								<strong th:unless="${venda.nova}" th:text="#{venda.edicao.titulo(${venda.codigo})}">Edição da venda nº [[${venda.codigo}]]</strong> 
+								<!-- na versão 3 Thymeleaf não entendeu esse th:text -->
+								<!-- <strong th:if="${venda.nova}" th:text="#{venda.cadastro.titulo}">Cadastro de venda</strong>  -->
+								<strong th:if="${venda.nova}">Cadastro de Vendas</strong>
+								<!-- <strong th:unless="${venda.nova}" th:text="#{venda.edicao.titulo(${venda.codigo})}">Edição da venda nº [[${venda.codigo}]]</strong>  -->
+								<strong th:unless="${venda.nova}" >Edição da venda nº [[${venda.codigo}]]</strong> 
 							</h1>
 						</div>
 						<div class="col-xs-2">

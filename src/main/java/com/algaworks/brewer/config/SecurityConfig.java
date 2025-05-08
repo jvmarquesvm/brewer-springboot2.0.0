@@ -76,8 +76,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin().loginPage("/login").permitAll() //Nao precisa estar autenticado
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // Configuração para permitir acessa a página de logout após habilitar o csrf
-			.and()
-			.exceptionHandling().accessDeniedPage("/403")
+			// ao modificar de página para fragmento.. não é mais necessário chamar 403	
+			//.and()
+			//.exceptionHandling().accessDeniedPage("/403")
 			//.and()
 			//.csrf().disable(); // sem essa configuração não consegue submeter para formulários que não tenham o action configurado e form para o método post
 			.and()

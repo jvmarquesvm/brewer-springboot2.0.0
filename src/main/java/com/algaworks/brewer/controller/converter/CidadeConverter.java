@@ -1,11 +1,13 @@
 package com.algaworks.brewer.controller.converter;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.algaworks.brewer.model.Cidade;
 
 //Cada converter criado deve registrar ele no WebConfig.java
+@Component
 public class CidadeConverter implements Converter<String, Cidade> {
 
 	@Override

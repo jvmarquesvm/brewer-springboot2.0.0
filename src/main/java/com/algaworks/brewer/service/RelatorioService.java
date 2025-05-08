@@ -38,6 +38,7 @@ public class RelatorioService {
 		
 		InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/relatorio_vendas_emitidas.jasper");
 		Connection conection = this.datasource.getConnection();
+		//Utilizando a api do jasper diretamente / sem configuração prévia
 		try {
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperStream, parametros, conection);
 			return JasperExportManager.exportReportToPdf(jasperPrint);

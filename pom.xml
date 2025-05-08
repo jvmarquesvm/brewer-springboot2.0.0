@@ -5,32 +5,36 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.algaworks</groupId>
 	<artifactId>brewer20</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>0.0.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+	</parent>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<failOnMissingWebXml>false</failOnMissingWebXml>
-		<java.version>8</java.version>
-		<maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
-		<spring-framework.version>5.0.2.RELEASE</spring-framework.version>
-		<servlet.version>3.1.0</servlet.version>
-		<thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
-		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-		<nz.net.ultraq.thymeleaflayout-version>2.0.1</nz.net.ultraq.thymeleaflayout-version>
+		<java.version>1.8</java.version>
+		<!-- spring-framework.version>5.0.2.RELEASE</spring-framework.version> -->
+		<!-- <servlet.version>3.1.0</servlet.version>  -->
+		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+		<nz.net.ultraq.thymeleaflayout-version>2.2.2</nz.net.ultraq.thymeleaflayout-version>
+		<!-- <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>  -->
 		<!-- Logging -->
-		<log4j.version>2.10.0</log4j.version>
-		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
-		<hibernate.version>5.1.0.Final</hibernate.version>
-		<flyway-maven-plugin.version>4.0.2</flyway-maven-plugin.version>
+		<!-- <log4j.version>2.10.0</log4j.version> -->
+		<!-- <jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version> -->
+		<!-- <hibernate.version>5.1.0.Final</hibernate.version> -->
+		<!-- <flyway-maven-plugin.version>4.0.2</flyway-maven-plugin.version> -->
 		
 		<!-- <mysql-connector-java.version>5.1.31</mysql-connector-java.version> -->
-		<mysql-connector-java.version>8.0.30</mysql-connector-java.version> 
+		<!-- <mysql-connector-java.version>8.0.30</mysql-connector-java.version> -->
 		<!-- Spring Data JPA -->
-		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
+		<!-- <spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>  -->
 		<!-- Jackson - JSON -->
-		<jackson-core.version>2.9.2</jackson-core.version>
+		<jackson-core.version>2.9.2</jackson-core.version> 
 		<!-- Thumbnailator - Gerar Thumbnail -->
 		<thumbnailator.version>0.4.8</thumbnailator.version>
 		<!-- Thymeleaf Extras -->
@@ -38,26 +42,26 @@
 		<!-- Cache Guava
 		<guava.version>19.0</guava.version>   -->
 		<!-- Beans Utils - Annotations -->
-		<commons-beanutils.version>1.9.2</commons-beanutils.version>
+		<!-- <commons-beanutils.version>1.9.2</commons-beanutils.version> -->
 		<!-- Spring Security -->
-		<spring-security.version>4.1.1.RELEASE</spring-security.version>
+		<!-- <spring-security.version>4.1.1.RELEASE</spring-security.version> -->
 		<!-- Thymeleaf Spring Security -->
-		<thymeleaf-extras-springsecurity.version>3.0.0.RELEASE</thymeleaf-extras-springsecurity.version>
+		<thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
 		<!-- JUnit -->
-		<junit.version>4.12</junit.version>
+		<!-- <junit.version>4.12</junit.version> -->
 		<!-- JavaMail -->
-		<java.mail.version>1.5.6</java.mail.version>
+		<!-- <java.mail.version>1.5.6</java.mail.version> -->
 		<!-- AWS - S3 -->
 		<aws-java-sdk3.version>1.10.77</aws-java-sdk3.version>
 		<!-- Apache Commons DBCP / Mysql no Heroku -->
-		<commons-dbcp2.version>2.1.1</commons-dbcp2.version>
+		<!-- <commons-dbcp2.version>2.1.1</commons-dbcp2.version> -->
 		<!-- ehCache implementação -->
-		<ehcache.version>3.4.0</ehcache.version>
+		<!-- <ehcache.version>3.4.0</ehcache.version> -->
 		<!-- JCache especificação -->
-		<jcache.version>1.0.0</jcache.version>
+		<!-- <jcache.version>1.0.0</jcache.version> -->
 	</properties>
 	
-	<!-- Gerenciador de versões de dependências do Springframework -->
+	<!-- Gerenciador de versões de dependências do Springframework 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -68,10 +72,10 @@
 			  <scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>
+	</dependencyManagement>-->
 	
 	<dependencies>
-		<!-- SpringMVC -->
+		<!-- SpringMVC
 		<dependency>
 		  <groupId>org.springframework</groupId>
 		  <artifactId>spring-webmvc</artifactId>
@@ -82,9 +86,20 @@
 		  		<artifactId>commons-logging</artifactId>
 		  	</exclusion>
 		  </exclusions>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- Thymeleaf 
 		<dependency>
 		  <groupId>org.thymeleaf</groupId>
 		  <artifactId>thymeleaf</artifactId>
@@ -97,32 +112,50 @@
 		  <artifactId>thymeleaf-spring4</artifactId>
 		  <version>${thymeleaf.version}</version>
 		  <scope>compile</scope>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-        
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.mxab.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-data-attribute</artifactId>
+		</dependency>
+        <!-- 
         <dependency>
-		  <groupId>nz.net.ultraq.thymeleaf</groupId>
+		  <groupId></groupId>
 		  <artifactId>thymeleaf-layout-dialect</artifactId>
           <version>${nz.net.ultraq.thymeleaflayout-version}</version>
           <scope>compile</scope>
-		</dependency>
+		</dependency>  -->
 		
-		<!-- Servlet API scope provided pois o tomcat já tem -->
+		<!-- Servlet API scope provided pois o tomcat já tem 
 		<dependency>
 		  <groupId>javax.servlet</groupId>
 		  <artifactId>javax.servlet-api</artifactId>
-		  <version>${servlet.version}</version>
+		  -<version>${servlet.version}</version> -
 		  <scope>provided</scope>
-		</dependency>
+		</dependency>-->
 		
-		<!-- Especificação Bean Validaiton / Hibernate Validator -->
+		<!-- Especificação Bean Validaiton / Hibernate Validator 
 		<dependency>
 		  <groupId>org.hibernate</groupId>
 		  <artifactId>hibernate-validator</artifactId>
 		  <version>${hibernate-validator.version}</version>
 		  <scope>compile</scope>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-		<!-- Logging -->
+		<!-- Logging 
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
@@ -142,23 +175,23 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${jcl-over-slf4j.version}</version>
-		</dependency>
-		
-		<!-- JPA / Hibernate -->
+		</dependency> -->
+		 
+		<!-- JPA / Hibernate 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 
-		<!-- suporte de datas java8 -->
+		<!-- suporte de datas java8 
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-java8</artifactId>
 			<version>${hibernate.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency>-->
 		
 		<!-- Mysql  
 		<dependency>
@@ -168,13 +201,24 @@
 			<scope>provided</scope>
 		</dependency> -->
 		
-		<!-- Spring Data JPA -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+				
+		<!-- Spring Data JPA 
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring-data-jpa.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		
 		<!-- Jackson - JSON -->
 		<dependency>
@@ -192,13 +236,13 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!-- Dialetos Extra Thumeleaf -->
+		<!-- Dialetos Extra Thumeleaf 
 		<dependency>
 		    <groupId>com.github.mxab.thymeleaf.extras</groupId>
 		    <artifactId>thymeleaf-extras-data-attribute</artifactId>
 		    <version>${thymeleaf-extras-data.version}</version>
 		    <scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		
 		<!-- Cache Guava 
 		<dependency>
@@ -208,21 +252,21 @@
 		    <scope>compile</scope>
 		</dependency> -->
 		
-		<!-- Spring Context Support (necessário para usar o guava)-->
+		<!-- Spring Context Support (necessário para usar o guava)
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<scope>compile</scope>
-		</dependency>
-		
+		</dependency>-->
+		<!-- 
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>${commons-beanutils.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency>  -->
 		
-		<!-- Spring Security -->
+		<!-- Spring Security 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
@@ -235,30 +279,45 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		
-		<!-- Thymeleaf - Extras Spring Security 4 -->
+		<!-- Thymeleaf - Extras Spring Security 4 
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 			<version>${thymeleaf-extras-springsecurity.version}</version>
 			<scope>compile</scope>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 		
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
+			<!-- <version>${junit.version}</version>  -->
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- JavaMail -->
+		<!-- JavaMail 
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>${java.mail.version}</version>
 			<scope>compile</scope>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
@@ -268,13 +327,13 @@
 		    <version>${aws-java-sdk3.version}</version>
 		</dependency>
 		
-		<!-- Apache Commons DBCP / Mysql no Heroku -->
+		<!-- Apache Commons DBCP / Mysql no Heroku
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-dbcp2</artifactId>
 		    <version>${commons-dbcp2.version}</version>
 		    <scope>compile</scope>
-		</dependency>
+		</dependency>  -->
 		
 		<!-- JasperReports-->
 		<!-- Essa versão deve ser escolhida de acordo com a versão do Jaspersoft Studio
@@ -282,51 +341,60 @@
 		<dependency>
 		    <groupId>net.sf.jasperreports</groupId>
 		    <artifactId>jasperreports</artifactId>
-		    <version>6.21.3</version>
+		    <version>6.3.0</version>
 		    <scope>compile</scope>
 		</dependency>
 		
 		<dependency>
 		    <groupId>net.sf.jasperreports</groupId>
 		    <artifactId>jasperreports-fonts</artifactId>
-		    <version>6.21.3</version>
+		    <version>6.0.0</version>
 		    <scope>compile</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind 
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.17.3</version>
-		</dependency>
+		</dependency> -->
 	
 		<!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
 		<dependency>
 		    <groupId>org.ehcache</groupId>
 		    <artifactId>ehcache</artifactId>
-		    <version>${ehcache.version}</version>
+		   <!-- <version>${ehcache.version}</version> -->
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/javax.cache/cache-api -->
 		<dependency>
 		    <groupId>javax.cache</groupId>
 		    <artifactId>cache-api</artifactId>
-		    <version>${jcache.version}</version>
+		     <!-- <version>${jcache.version}</version> -->
 		</dependency>
 	</dependencies>
 	
-	<build> 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+<!-- <build> 
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
+				-  <version>${maven-compiler-plugin.version}</version>-
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			
-			<!-- Flyway -->
+			- Flyway -
 			<plugin>
 		        <groupId>org.flywaydb</groupId>
 		        <artifactId>flyway-maven-plugin</artifactId>
@@ -336,7 +404,7 @@
 		        </configuration>
 	   		</plugin>
 	   		
-	   		<!-- Plugin WebApp Runner para fazer o deploy no heroku -->
+	   		- Plugin WebApp Runner para fazer o deploy no heroku -
 	   		<plugin>
             	<groupId>org.apache.maven.plugins</groupId>
             	<artifactId>maven-dependency-plugin</artifactId>
@@ -358,23 +426,23 @@
 			  	</executions>
         	</plugin>
 		</plugins>
-	</build>
+	</build> -->
 	
-	<profiles>
+<!-- <profiles>
 		<profile>
 			<id>local</id>
 		</profile>
 		<profile>
 			<id>prod</id>
-			 <!-- prod é o profile ativo por default
-			quando não passar nada, o profile ativo é o prod  -->
+			 - prod é o profile ativo por default
+			quando não passar nada, o profile ativo é o prod  -
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<dependencies>
-				<!--  Mysql - colocado aqui devido a execução em produção
-				   scope era provided  -->
-				<dependency>
+				-  Mysql - colocado aqui devido a execução em produção
+				   scope era provided  -
+				dependency
 					<groupId>mysql</groupId>
 					<artifactId>mysql-connector-java</artifactId>
 					<version>${mysql-connector-java.version}</version>
@@ -382,6 +450,6 @@
 				</dependency>
 			</dependencies>
 		</profile>
-	</profiles> 
+	</profiles> -->
 	
 </project>

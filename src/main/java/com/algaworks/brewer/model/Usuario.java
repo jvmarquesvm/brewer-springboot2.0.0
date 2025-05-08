@@ -16,12 +16,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.algaworks.brewer.validation.AtributoConfirmacao;
 

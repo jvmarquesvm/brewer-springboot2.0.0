@@ -45,9 +45,9 @@ import org.springframework.web.servlet.resource.ResourceResolver;
 //import org.springframework.web.servlet.view.jasperreports.JasperReportsViewResolver;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
@@ -89,89 +89,85 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
  * 
  */
 
-@Configuration            //utilizandoSession pra simular escopo de view para a tabela de itens de venda
-@ComponentScan(basePackageClasses = {CervejasController.class, TabelasItensSession.class})
-@EnableWebMvc
-@EnableSpringDataWebSupport
+@Configuration //utilizandoSession pra simular escopo de view para a tabela de itens de venda
 @EnableCaching
 @EnableAsync
-//Removido na versão 5.0.2
-//public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
-public class WebConfig implements ApplicationContextAware, WebMvcConfigurer {
-	private ApplicationContext applicationContext;
+public class WebConfig implements /*ApplicationContextAware,*/ WebMvcConfigurer {
+	//private ApplicationContext applicationContext;
 	
-	private ITemplateResolver templateResolver() {
-		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-		resolver.setApplicationContext(applicationContext);
-		resolver.setPrefix("classpath:/templates/");
-		resolver.setSuffix(".html");
-		resolver.setTemplateMode(TemplateMode.HTML);
-		return resolver;
-	}
-	
-	@Bean
-	public TemplateEngine templateEngine() {
-		SpringTemplateEngine engine = new SpringTemplateEngine();
-		engine.setEnableSpringELCompiler(true);
-		engine.setTemplateResolver(templateResolver());
-		engine.addDialect(new LayoutDialect()); //configurando o dialeto thymeleaf para o decorator
-		engine.addDialect(new BrewerDialect()); //Extendendo o thymeleaf
-		engine.addDialect(new DataAttributeDialect()); //Extendendo o thymeleaf - atributos data
-		engine.addDialect(new SpringSecurityDialect()); //Extendendo o thymeleaf - Spring Security ( para buscar o nome do usuário logado )
-		return engine;
-	}
+//	private ITemplateResolver templateResolver() {
+//		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+//		resolver.setApplicationContext(applicationContext);
+//		resolver.setPrefix("classpath:/templates/");
+//		resolver.setSuffix(".html");
+//		resolver.setTemplateMode(TemplateMode.HTML);
+//		return resolver;
+//	}
+//	
+//	@Bean
+//	public TemplateEngine templateEngine() {
+//		SpringTemplateEngine engine = new SpringTemplateEngine();
+//		engine.setEnableSpringELCompiler(true);
+//		engine.setTemplateResolver(templateResolver());
+//		engine.addDialect(new LayoutDialect()); //configurando o dialeto thymeleaf para o decorator
+//		engine.addDialect(new BrewerDialect()); //Extendendo o thymeleaf
+//		engine.addDialect(new DataAttributeDialect()); //Extendendo o thymeleaf - atributos data
+//		engine.addDialect(new SpringSecurityDialect()); //Extendendo o thymeleaf - Spring Security ( para buscar o nome do usuário logado )
+//		return engine;
+//	}
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
+	//
+	//@Override
+	//public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+	//	this.applicationContext = applicationContext;
+	//}
 	
-	@Bean
-	public ViewResolver viewResolver() {
-		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-		resolver.setTemplateEngine(templateEngine());
-		resolver.setCharacterEncoding("UTF-8");
-		resolver.setOrder(1);
-		return resolver;
-	}
+	//@Bean
+	//public ViewResolver viewResolver() {
+	//	ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+	//	resolver.setTemplateEngine(templateEngine());
+	//	resolver.setCharacterEncoding("UTF-8");
+	//	resolver.setOrder(1);
+	//	return resolver;
+	//}
 	
 	/**
 	 * Adicionar recursos que não tem na aplicação
 	 */
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-	}
+//	@Override
+//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+//	}
 	
-	@Bean
-	public FormattingConversionService mvcConversionService() {
-		DefaultFormattingConversionService service = new DefaultFormattingConversionService();
-		//Adiconando os coverters - modificando o tipo do identificado de String para Long
-		service.addConverter(new EstiloConverter());
-		service.addConverter(new CidadeConverter());
-		service.addConverter(new EstadoConverter());
-		service.addConverter(new GrupoConverter());
-		
-		//Utiliza o locale que foi enviado pelo cliente
-		//Se for usar um formatador diferente, tem que criar um
-		//NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
-		BigDecimalFormatter bigDecimalFormatter = new BigDecimalFormatter("#,##0.00");
-		service.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
-		
-		//NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
-		BigDecimalFormatter integerFormatter = new BigDecimalFormatter("#,##0");
-		service.addFormatterForFieldType(Integer.class, integerFormatter);
-		
-		//API de datas >= Java8
-		DateTimeFormatterRegistrar dateTimeFormatterRegistrar = new DateTimeFormatterRegistrar();
-		dateTimeFormatterRegistrar.setDateFormatter(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		
-		//Adicionando para a tabela venda hora da entrega
-		dateTimeFormatterRegistrar.setTimeFormatter(DateTimeFormatter.ofPattern("HH:mm"));
-		dateTimeFormatterRegistrar.registerFormatters(service);
-		
-		return service;
-	}
+//	@Bean
+//	public FormattingConversionService mvcConversionService() {
+//		DefaultFormattingConversionService service = new DefaultFormattingConversionService();
+//		//Adiconando os coverters - modificando o tipo do identificado de String para Long
+//		service.addConverter(new EstiloConverter());
+//		service.addConverter(new CidadeConverter());
+//		service.addConverter(new EstadoConverter());
+//		service.addConverter(new GrupoConverter());
+//		
+//		//Utiliza o locale que foi enviado pelo cliente
+//		//Se for usar um formatador diferente, tem que criar um
+//		//NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
+//		BigDecimalFormatter bigDecimalFormatter = new BigDecimalFormatter("#,##0.00");
+//		service.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
+//		
+//		//NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
+//		BigDecimalFormatter integerFormatter = new BigDecimalFormatter("#,##0");
+//		service.addFormatterForFieldType(Integer.class, integerFormatter);
+//		
+//		//API de datas >= Java8
+//		DateTimeFormatterRegistrar dateTimeFormatterRegistrar = new DateTimeFormatterRegistrar();
+//		dateTimeFormatterRegistrar.setDateFormatter(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+//		
+//		//Adicionando para a tabela venda hora da entrega
+//		dateTimeFormatterRegistrar.setTimeFormatter(DateTimeFormatter.ofPattern("HH:mm"));
+//		dateTimeFormatterRegistrar.registerFormatters(service);
+//		
+//		return service;
+//	}
 	
 	//Esta forçando que o idioma pt seja sempre usado no navegador e para formatação numérica
 	//para internacionalização isto não funciona
@@ -190,10 +186,11 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer {
 //		return new ConcurrentMapCacheManager();
 //	}
 	
+	//Jcache é a especificação javaee e o ehCache é a implementação
 	@Bean
 	public CacheManager cacheManager() throws Exception {
 		return new JCacheCacheManager(Caching.getCachingProvider().getCacheManager(
-				getClass().getResource("/cache/ehcache.xml").toURI(), 
+				getClass().getResource("/env/ehcache.xml").toURI(), 
 				getClass().getClassLoader()
 			));
 	}
@@ -218,34 +215,34 @@ public class WebConfig implements ApplicationContextAware, WebMvcConfigurer {
 	
 	
 	//Colocado para traduzir o erro de datas mal formatada
-	@Bean
-	public MessageSource messageSource() {
-		ReloadableResourceBundleMessageSource bundle = new ReloadableResourceBundleMessageSource();
-		bundle.setBasename("classpath:/messages");
-		bundle.setDefaultEncoding("UTF-8"); //http://www.utf8-chartable.de
-		
-		return bundle;
-	}
+//	@Bean
+//	public MessageSource messageSource() {
+//		ReloadableResourceBundleMessageSource bundle = new ReloadableResourceBundleMessageSource();
+//		bundle.setBasename("classpath:/messages");
+//		bundle.setDefaultEncoding("UTF-8"); //http://www.utf8-chartable.de
+//		
+//		return bundle;
+//	}
 	
 	//Integração entre o MVC e SpringData - com isso já não é necessário fazer o findOne
-	@Bean
-	public DomainClassConverter<FormattingConversionService> domainClassConverter() {
-		return new DomainClassConverter<FormattingConversionService>(mvcConversionService());
-	}
+//	@Bean
+//	public DomainClassConverter<FormattingConversionService> domainClassConverter() {
+//		return new DomainClassConverter<FormattingConversionService>(mvcConversionService());
+//	}
 	
 	//Configuração para validação de mensagens de aviso
 	//Verificar arquivo de properties do hibernate validator
 	//As chaves estão lá
-	@Bean
-	public LocalValidatorFactoryBean validator() {
-		LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
-		localValidatorFactoryBean.setValidationMessageSource(messageSource());
-		return localValidatorFactoryBean;
-	}
-
-	public Validator getValidator() {
-		return validator();
-	}
+//	@Bean
+//	public LocalValidatorFactoryBean validator() {
+//		LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+//		localValidatorFactoryBean.setValidationMessageSource(messageSource());
+//		return localValidatorFactoryBean;
+//	}
+//
+//	public Validator getValidator() {
+//		return validator();
+//	}
 	
 	//Criando ViewResolver para a página de relatorio com Jasper
 	//Na versão 5.0.2 do Springframework não tem suporte ao jasperReportView

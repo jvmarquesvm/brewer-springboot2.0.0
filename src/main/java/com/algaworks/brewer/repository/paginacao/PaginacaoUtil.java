@@ -23,7 +23,7 @@ public class PaginacaoUtil {
 		Sort sort = pageable.getSort();
 		System.out.println("Ordenação Tipo: " + sort);
 		
-		if(sort != null) {
+		if (sort != null && sort.isSorted()) {
 			//Ordenando apenas por 1 campo, mas pode ser vários
 			Sort.Order order = sort.iterator().next();
 			String property = order.getProperty();

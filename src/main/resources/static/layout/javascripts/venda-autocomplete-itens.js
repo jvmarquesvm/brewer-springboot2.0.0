@@ -20,7 +20,7 @@ Brewer.Autocomplete = ( function(){
 			url: function (skuOuNomeInput) { 
 			             //return "/brewer/cerveja?skuOuNome=" + skuOuNomeInput
 			             return this.skuOuNomeInput.data("url") + "?skuOuNome=" + skuOuNomeInput;
-			}.bind(this),
+			     }.bind(this),
 			getValue: 'nome',
 			minCharNumber: 3,
 			ajaxSettings: {

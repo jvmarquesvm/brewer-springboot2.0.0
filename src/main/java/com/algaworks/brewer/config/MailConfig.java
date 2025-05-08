@@ -25,7 +25,7 @@ import com.algaworks.brewer.mail.Mailer;
 @Configuration
 @ComponentScan(basePackageClasses = Mailer.class)
 //@PropertySource({"classpath:env/mail.properties"})
-@PropertySource({"classpath:env/mail-${ambiente:local}.properties"})
+//@PropertySource({"classpath:env/mail-${ambiente:local}.properties"})
 //para iOS
 //@PropertySource( value={"file://${HOME}/.brewer-mail.properties"}, ignoreResourceNotFound = true)
 //para windowns
@@ -40,11 +40,12 @@ public class MailConfig {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost("smtp.sendgrid.net");
 		mailSender.setPort(587);
-		mailSender.setUsername(env.getProperty("email.username"));
-		mailSender.setPassword(env.getProperty("SENDGRID_PASSWORD"));
+		mailSender.setUsername(env.getProperty("brewer2.email.username"));
+		mailSender.setPassword(env.getProperty("brewer2.password"));
+		//mailSender.setPassword(env.getProperty("SENDGRID_PASSWORD"));
 		
-		System.out.println(env.getProperty("email.username"));
-		System.out.println(env.getProperty("password"));
+		System.out.println(env.getProperty("brewer2.email.username"));
+		System.out.println(env.getProperty("brewer2.password"));
 		
 		Properties props = new Properties();
 		props.put("mail.transport.protocol", "smtp");

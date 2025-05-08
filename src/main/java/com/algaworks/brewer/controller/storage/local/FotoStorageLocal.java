@@ -7,8 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,25 +22,31 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
 
 //Anotation para usar o S3 ou URL local
-@Profile("local")
+@Profile("!prod")
 @Component
 public class FotoStorageLocal implements FotoStorage  {
 	private static final Logger logger = LoggerFactory.getLogger(FotoStorageLocal.class);
+	
+	@Value("${brewer.fotostoragelocal.local}")
 	private Path local;
+	@Value("${brewer.fotostoragelocal.localtemp}")
 	private Path localTemp;
 	
 	private static final String THUMBNAIL_PREFIX = "thumbnail.";
+	@Value("${brewer.fotostoragelocal.urlBase}")
+	private String urlBase;
 	
 	public FotoStorageLocal() {
-		this( FileSystems.getDefault().getPath(System.getenv("home"), ".brewerfotos") );
-		logger.info("Pastas criadas para armazenar as fotos " + this.local);
+		//this( FileSystems.getDefault().getPath(System.getenv("home"), ".brewerfotos") );
+		//logger.info("Pastas criadas para armazenar as fotos " + this.local);
 	}
 	
-	public FotoStorageLocal(Path path) {
-		this.local = path;
-		criarPastas();
-	}
+	//public FotoStorageLocal(Path path) {
+	//	this.local = path;
+	//	criarPastas();
+	//}
 	
+	@PostConstruct
 	private void criarPastas() {
 		try {
 			Files.createDirectories(this.local);
@@ -165,6 +174,6 @@ public class FotoStorageLocal implements FotoStorage  {
 	 */
 	@Override
 	public String getUrl(String foto) {
-		return "http://localhost:8080/brewer/fotos/" + foto;
+		return urlBase + foto;
 	}
 }

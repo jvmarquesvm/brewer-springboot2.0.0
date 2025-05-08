@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
@@ -17,9 +18,11 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+
 //@ComponentScan(basePackageClasses = {FotoStorageRunnable.class, FotoStorage.class,  FotoStorageS3.class})
 @Configuration
 @PropertySource(value={"file:${HOME}/.brewer-s3.properties"}, ignoreResourceNotFound = true)
+@Profile("prod")
 public class S3Config {
 	
 	@Autowired

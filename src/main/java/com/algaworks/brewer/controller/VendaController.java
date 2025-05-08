@@ -1,6 +1,7 @@
 package com.algaworks.brewer.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -118,17 +119,20 @@ public class VendaController {
 	//Retornando um html renderizado em Ajax
 	@PostMapping("/item")
 	public ModelAndView adicionarItem(Long codigoCerveja, String uuid) {
-		Cerveja cerveja =  cervejasRepository.findOne(codigoCerveja);
+		Cerveja cerveja =  cervejasRepository.findById(codigoCerveja).get();
+		
 		this.tabelasItensSession.adicionarItem(uuid, cerveja, 1);
 		System.out.println("Total de Itens " + this.tabelasItensSession.getItens(uuid).size());
 		
 		return mvTabelaItensVenda(uuid);
 	}
 	
+	//pode pegar cerveja passando o codigo e buscando da base ou 
+	//declarar o objeto cerveja que o spring já busca automaticamente
 	@PutMapping("/item/{codigoCerveja}")
 	public ModelAndView alterarQuantidadeItem(@PathVariable Long codigoCerveja, 
 			                               Integer quantidade, String uuid) {
-		Cerveja cerveja =  cervejasRepository.findOne(codigoCerveja);
+		Cerveja cerveja =  cervejasRepository.findById(codigoCerveja).get();
 		this.tabelasItensSession.alterarQuantidadeItens(uuid, cerveja, quantidade);
 		
 		System.out.println("Itens " + this.tabelasItensSession.getItens(uuid).get(0).toString());
@@ -194,10 +198,11 @@ public class VendaController {
 	private VendaValidator vendaValidator;
 	
 	//Vai ser chamado na hora de criar o controlador e quando encontrar alguem com @Valid, será executado
-	@InitBinder("venda")
-	public void inicializarValidator(WebDataBinder binder) {
-		binder.setValidator(vendaValidator);
-	}
+	//@InitBinder("venda")
+	//public void inicializarValidator(WebDataBinder binder) {
+	//	binder.setValidator(vendaValidator);
+	//}
+	//já está sendo validado no método validarvenda
 	
 	@PostMapping( value="/novo", params = "emitir")      //Validando com o Validator .... se colocar o bindingresult com ultimo parâmetro dá erro 400 na chamada
 	public ModelAndView emitir(/*@Valid*/ Venda venda,  BindingResult result, RedirectAttributes attributes, 
@@ -256,7 +261,7 @@ public class VendaController {
 	@GetMapping
 	public ModelAndView pesquisar(VendaFilter vendaFilter, 
 			@PageableDefault(size = 15) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("/venda/PesquisaVenda");
+		ModelAndView mv = new ModelAndView("venda/PesquisaVenda");
 		mv.addObject("todosStatus", StatusVenda.values());
 		System.out.println("passou no pesquisar venda");
 		
@@ -293,7 +298,10 @@ public class VendaController {
 		try {
 			this.cadastroVendaService.cancelar(venda);
 		} catch(AccessDeniedException e) {
-			return new ModelAndView("/403");
+			//return new ModelAndView("/403");
+			ModelAndView mv = new ModelAndView("error");
+			mv.addObject("status", 403);
+			return mv;
 		}
 		
 		attributes.addFlashAttribute("message", "Venda cancelada com sucesso");
