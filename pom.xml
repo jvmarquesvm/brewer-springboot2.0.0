@@ -337,7 +337,7 @@
 		
 		<!-- JasperReports-->
 		<!-- Essa versão deve ser escolhida de acordo com a versão do Jaspersoft Studio
-		 no caso foi a versão 6.21.3 que exigiu a lib do jackson-databind -->
+		 no caso foi a versão 6.21.3 que exigiu a lib do jackson-databind  -->
 		<dependency>
 		    <groupId>net.sf.jasperreports</groupId>
 		    <artifactId>jasperreports</artifactId>
