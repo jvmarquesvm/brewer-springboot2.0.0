@@ -99,7 +99,7 @@
 		      </div>
 			</aside>  -->
 			<!-- Inserido através do Replace -->
-			<div th:replace="/fragments/BarraLateral :: barraLateral"></div>
+			<div th:replace="fragments/BarraLateral :: barraLateral"></div>
 			
 			<!-- Inserido através do decorator -->
 			<section class="aw-layout-content  js-content" layout:fragment="cadastroCerveja-conteudo"></section>
@@ -110,7 +110,7 @@
 				</div>
 			</footer> -->
 			<!-- Inserido através do Replace -->
-			<div th:replace="/fragments/Rodape :: rodape"></div>
+			<div th:replace="fragments/Rodape :: rodape"></div>
 		</div>
 		
 		<script th:src="@{/layout/javascripts/vendors.min.js}" type="text/javascript"></script>
