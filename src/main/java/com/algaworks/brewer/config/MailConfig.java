@@ -41,8 +41,8 @@ public class MailConfig {
 		mailSender.setHost("smtp.sendgrid.net");
 		mailSender.setPort(587);
 		mailSender.setUsername(env.getProperty("brewer2.email.username"));
-		mailSender.setPassword(env.getProperty("brewer2.password"));
-		//mailSender.setPassword(env.getProperty("SENDGRID_PASSWORD"));
+		//mailSender.setPassword(env.getProperty("brewer2.password"));
+		mailSender.setPassword(env.getProperty("SENDGRID_PASSWORD"));
 		
 		System.out.println(env.getProperty("brewer2.email.username"));
 		System.out.println(env.getProperty("brewer2.password"));
