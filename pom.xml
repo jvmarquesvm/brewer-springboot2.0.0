@@ -53,7 +53,7 @@
 		<!-- JavaMail -->
 		<!-- <java.mail.version>1.5.6</java.mail.version> -->
 		<!-- AWS - S3 -->
-		<aws-java-sdk3.version>1.10.77</aws-java-sdk3.version>
+		<aws-java-sdk3.version>1.12.261</aws-java-sdk3.version>
 		<!-- Apache Commons DBCP / Mysql no Heroku -->
 		<!-- <commons-dbcp2.version>2.1.1</commons-dbcp2.version> -->
 		<!-- ehCache implementação -->
