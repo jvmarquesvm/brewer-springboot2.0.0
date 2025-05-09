@@ -45,7 +45,7 @@ public class MailConfig {
 		mailSender.setPassword(env.getProperty("SENDGRID_PASSWORD"));
 		
 		System.out.println(env.getProperty("brewer2.email.username"));
-		System.out.println(env.getProperty("brewer2.password"));
+		System.out.println(env.getProperty("SENDGRID_PASSWORD"));
 		
 		Properties props = new Properties();
 		props.put("mail.transport.protocol", "smtp");
